@@ -1,14 +1,18 @@
 # JV Data
 
-Site institucional da JV Data — consultoria em Business Intelligence, automação de processos (Power Automate e Python) e tratamento de dados.
+Site institucional da JV Data — consultoria em Business Intelligence, automação de processos (Power Automate e Python) e tratamento de dados. Trabalho feito por projeto, sem pacotes fechados.
 
 ## Estrutura
 
 - `index.html` — landing page completa (HTML/CSS/JS em um único arquivo, sem build necessário).
+- `assets/` — logo, favicons e imagem de compartilhamento (Open Graph):
+  - `jv-data-logo.png` — logo completa (ícone + wordmark), usada no cabeçalho.
+  - `jv-data-icon.png` — apenas o ícone `{{JV}}`, recortado da logo original.
+  - `favicon-*.png`, `favicon.ico`, `apple-touch-icon.png` — gerados a partir do ícone.
+  - `og-image.jpg` — imagem 1200×630 para pré-visualização ao compartilhar o link (WhatsApp, LinkedIn, etc.).
+  - `logo-source.jpg` — arquivo original da logo enviado, mantido como referência caso precise regenerar os outros assets.
 
 ## Como visualizar localmente
-
-Basta abrir `index.html` diretamente no navegador, ou servir a pasta:
 
 ```bash
 python3 -m http.server 8000
@@ -16,14 +20,19 @@ python3 -m http.server 8000
 
 e acessar `http://localhost:8000`.
 
+## O que já está pronto
+
+- Paleta de cores alinhada à logo (azul-marinho + ciano/teal), tema claro.
+- Botão de WhatsApp (header, hero, seção "Como funciona", CTA final e botão flutuante) apontando para `+55 71 99943-0604`.
+- Seção "Como funciona" com o processo por projeto (diagnóstico → proposta → desenvolvimento → entrega) e CTA "Faça seu orçamento via WhatsApp" — sem pacotes/assinatura, valores a combinar.
+- SEO: title/description otimizados, Open Graph e Twitter Card, dados estruturados (JSON-LD `ProfessionalService`), favicons e `robots`/`canonical`.
+- Animações: grafo de dados animado no hero, revelação em cascata ao rolar a página, sombra no header ao rolar, pulso no botão flutuante do WhatsApp, hover nos cards. Tudo respeita `prefers-reduced-motion`.
+
 ## Pendências (TODO)
 
-- [ ] **Número de WhatsApp real** — hoje está com um número placeholder (`5511999999999`) na constante `WHATSAPP_NUMBER` em `index.html` (perto do fim do arquivo). Precisa ser substituído pelo número real da empresa.
-- [ ] **Confirmar nome final da marca** — o site está usando "JV Data" (baseado no nome do repositório). Se o nome definitivo for outro, ajustar título, cabeçalho, texto do hero e rodapé.
-- [ ] **Fotos da equipe** — as fotos de João Lordelo e Vitor Mota já estão embutidas no HTML; substituir se quiserem fotos mais atuais/profissionais.
-- [ ] **Textos de "Sobre" e experiência** — revisar o resumo da experiência da empresa na seção "Quem somos".
-- [ ] **Pacotes e preços** — a seção "Pacotes" tem descrições de escopo (Starter/Pro/Enterprise) mas sem preços; definir se os valores serão exibidos publicamente.
-- [ ] **Hospedagem** — ainda não publicado. Pode ser hospedado via GitHub Pages (ativar em Settings → Pages, branch `main`, pasta raiz) ou outro provedor.
+- [ ] **Revisar o texto da seção "Sobre"** — hoje é um texto genérico de consultoria de dados; ajustar se quiser algo mais específico da JV Data.
+- [ ] **Exemplos de projeto** — a seção "Tipos de projeto que entregamos" tem exemplos ilustrativos; substituir por cases reais quando tiverem.
+- [ ] **Domínio próprio** — se for usar um domínio customizado em vez do GitHub Pages, atualizar as URLs em `index.html` (meta `canonical`, `og:url`, `og:image`, `twitter:image` e o JSON-LD) e configurar o arquivo `CNAME`.
 
 ## Deploy sugerido (GitHub Pages)
 

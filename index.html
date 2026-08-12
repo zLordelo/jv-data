@@ -3,24 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JV Data — Dados, automação e decisões mais claras</title>
+<title>JV Data — Consultoria em Power BI, Automação e Dados</title>
+<meta name="description" content="A JV Data é uma consultoria especializada em Business Intelligence, automação de processos (Power Automate e Python) e tratamento de dados. Dashboards, relatórios e automações sob medida, por projeto.">
+<meta name="keywords" content="Power BI, Business Intelligence, dashboards, automação de processos, Power Automate, automação Python, Excel avançado, consultoria em dados, análise de dados">
+<meta name="robots" content="index, follow">
+<meta name="author" content="JV Data">
+<link rel="canonical" href="https://zlordelo.github.io/jv-data/">
+<meta name="theme-color" content="#0A1830">
+
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="shortcut icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="JV Data">
+<meta property="og:title" content="JV Data — Consultoria em Power BI, Automação e Dados">
+<meta property="og:description" content="Business Intelligence, automação de processos (Power Automate e Python) e tratamento de dados. Projetos sob medida para sua empresa.">
+<meta property="og:url" content="https://zlordelo.github.io/jv-data/">
+<meta property="og:image" content="https://zlordelo.github.io/jv-data/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JV Data — Consultoria em Power BI, Automação e Dados">
+<meta name="twitter:description" content="Business Intelligence, automação de processos (Power Automate e Python) e tratamento de dados. Projetos sob medida para sua empresa.">
+<meta name="twitter:image" content="https://zlordelo.github.io/jv-data/assets/og-image.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0E1F3D;
-    --ink-deep:#081326;
-    --cyan:#00C2D1;
-    --coral:#FF6B45;
-    --amber:#FFC857;
-    --violet:#7B5EA7;
-    --mint:#2EC4B6;
-    --paper:#F7F9FC;
-    --paper-dim:#ECF0F6;
-    --graphite:#1C1F26;
-    --graphite-60:rgba(28,31,38,.6);
-    --line:rgba(14,31,61,.12);
+    --ink:#0A1830;
+    --ink-deep:#04101F;
+    --teal:#00C2D1;
+    --teal-bright:#00E6EC;
+    --teal-deep:#0A5560;
+    --accent:#0A8A96;
+    --paper:#F7FAFB;
+    --paper-dim:#EAF3F4;
+    --graphite:#1C232B;
+    --graphite-60:rgba(20,30,38,.62);
+    --line:rgba(10,24,48,.12);
     --font-display:'Space Grotesk', Arial, sans-serif;
     --font-body:'Inter', Arial, sans-serif;
     --font-mono:'JetBrains Mono', monospace;
@@ -45,7 +73,7 @@
     font-size:12px;
     letter-spacing:.14em;
     text-transform:uppercase;
-    color:var(--coral);
+    color:var(--accent);
     font-weight:600;
   }
 
@@ -55,19 +83,27 @@
     background:rgba(247,249,252,.86);
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
+    transition:box-shadow .25s ease;
   }
+  .site-header.is-scrolled{box-shadow:0 8px 20px rgba(10,24,48,.06);}
   .site-header .wrap{
     display:flex; align-items:center; justify-content:space-between;
     height:72px;
   }
   .brand{display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:700; font-size:18px; color:var(--ink);}
-  .brand-mark{width:28px; height:28px; flex:none;}
+  .brand-mark{height:38px; width:auto; flex:none;}
   nav.primary-nav{display:flex; align-items:center; gap:28px;}
   nav.primary-nav a{
+    position:relative;
     font-size:14.5px; font-weight:500; color:var(--graphite);
-    padding:6px 0; border-bottom:2px solid transparent;
+    padding:6px 0;
   }
-  nav.primary-nav a:hover{border-bottom-color:var(--coral);}
+  nav.primary-nav a::after{
+    content:""; position:absolute; left:0; bottom:0; width:100%; height:2px;
+    background:var(--teal); transform:scaleX(0); transform-origin:left;
+    transition:transform .25s ease;
+  }
+  nav.primary-nav a:hover::after{transform:scaleX(1);}
   .btn{
     display:inline-flex; align-items:center; gap:8px;
     font-family:var(--font-body); font-weight:600; font-size:14.5px;
@@ -75,12 +111,13 @@
     cursor:pointer; transition:transform .15s ease, box-shadow .15s ease;
   }
   .btn:hover{transform:translateY(-1px);}
-  .btn-coral{background:var(--coral); color:#fff; box-shadow:0 6px 16px rgba(255,107,69,.32);}
-  .btn-coral:hover{box-shadow:0 10px 22px rgba(255,107,69,.4);}
+  .btn-primary{background:var(--teal); color:#fff; box-shadow:0 6px 16px rgba(0,194,209,.32);}
+  .btn-primary:hover{box-shadow:0 10px 22px rgba(0,194,209,.42);}
   .btn-ghost-dark{background:transparent; border-color:rgba(255,255,255,.35); color:#fff;}
   .btn-ghost-dark:hover{border-color:#fff;}
   .btn-outline{background:transparent; border-color:var(--ink); color:var(--ink);}
-  .header-cta{display:none;}
+  .header-cta{display:inline-flex;}
+  .header-cta-mobile{display:none;}
   .menu-toggle{display:none; background:none; border:none; cursor:pointer; padding:6px;}
   .menu-toggle span{display:block; width:22px; height:2px; background:var(--ink); margin:5px 0; border-radius:2px;}
 
@@ -96,24 +133,35 @@
     font-size:clamp(34px,4.4vw,54px); line-height:1.08; color:#fff; margin:18px 0 20px; font-weight:700;
     letter-spacing:-.01em;
   }
-  .hero h1 em{font-style:normal; color:var(--cyan);}
+  .hero h1 em{font-style:normal; color:var(--teal-bright);}
   .hero p.lead{font-size:17.5px; color:rgba(255,255,255,.78); max-width:480px;}
   .hero-ctas{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
   .hero-meta{display:flex; gap:26px; margin-top:46px; flex-wrap:wrap;}
-  .hero-meta div{font-family:var(--font-mono); font-size:12.5px; color:rgba(255,255,255,.6); border-left:2px solid var(--coral); padding-left:10px;}
+  .hero-meta div{font-family:var(--font-mono); font-size:12.5px; color:rgba(255,255,255,.6); border-left:2px solid var(--teal); padding-left:10px;}
   .hero-meta strong{display:block; font-family:var(--font-body); font-size:14.5px; color:#fff; font-weight:600;}
 
-  .prism-figure{position:relative; height:340px;}
-  .prism-figure svg{position:absolute; inset:0; width:100%; height:100%;}
-  .beam-in{stroke:#fff; stroke-width:3; opacity:.85;}
-  .spectrum-line{stroke-width:7; stroke-linecap:round; opacity:0; transform:translateX(-14px); animation:fan .9s ease forwards;}
-  .spectrum-line.l1{stroke:var(--amber); animation-delay:.15s;}
-  .spectrum-line.l2{stroke:var(--coral); animation-delay:.3s;}
-  .spectrum-line.l3{stroke:var(--cyan); animation-delay:.45s;}
-  .spectrum-line.l4{stroke:var(--violet); animation-delay:.6s;}
-  @keyframes fan{ to{ opacity:1; transform:translateX(0); } }
+  .data-figure{position:relative; height:340px;}
+  .data-figure svg{position:absolute; inset:0; width:100%; height:100%;}
+  .bracket-decor{fill:none; stroke:rgba(255,255,255,.06); stroke-width:10; font-family:var(--font-mono);}
+  .orbit-lines line{stroke:rgba(0,194,209,.4); stroke-width:1.5; stroke-dasharray:240; stroke-dashoffset:240; animation:draw-line 1.1s ease forwards;}
+  .orbit-lines line:nth-child(1){animation-delay:.05s;}
+  .orbit-lines line:nth-child(2){animation-delay:.18s;}
+  .orbit-lines line:nth-child(3){animation-delay:.31s;}
+  .orbit-lines line:nth-child(4){animation-delay:.44s;}
+  .orbit-lines line:nth-child(5){animation-delay:.57s;}
+  .orbit-lines line:nth-child(6){animation-delay:.7s;}
+  @keyframes draw-line{ to{ stroke-dashoffset:0; } }
+  .orbit-nodes circle{transform-box:fill-box; transform-origin:center; opacity:0; animation:node-in .5s ease forwards;}
+  .orbit-nodes circle.n1{animation-delay:.2s;} .orbit-nodes circle.n2{animation-delay:.33s;}
+  .orbit-nodes circle.n3{animation-delay:.46s;} .orbit-nodes circle.n4{animation-delay:.59s;}
+  .orbit-nodes circle.n5{animation-delay:.72s;} .orbit-nodes circle.n6{animation-delay:.85s;}
+  @keyframes node-in{ from{opacity:0; transform:scale(.3);} to{opacity:1; transform:scale(1);} }
+  .node{fill:var(--teal); filter:drop-shadow(0 0 6px rgba(0,194,209,.65)); animation-name:node-in, node-pulse; animation-duration:.5s, 2.6s; animation-timing-function:ease, ease-in-out; animation-iteration-count:1, infinite; animation-fill-mode:forwards, none;}
+  .node-core{fill:var(--teal-bright); filter:drop-shadow(0 0 16px rgba(0,230,236,.75)); animation:node-in .5s ease forwards;}
+  @keyframes node-pulse{ 0%,100%{transform:scale(1);} 50%{transform:scale(1.3);} }
   @media (prefers-reduced-motion: reduce){
-    .spectrum-line{animation:none; opacity:1; transform:none;}
+    .orbit-lines line{animation:none; stroke-dashoffset:0;}
+    .orbit-nodes circle{animation:none; opacity:1; transform:none;}
   }
 
   /* ---------- generic section ---------- */
@@ -125,19 +173,24 @@
 
   .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
   .reveal.is-visible{opacity:1; transform:translateY(0);}
+  .service-grid .reveal:nth-child(2), .team-grid .reveal:nth-child(2), .process-grid .reveal:nth-child(2), .project-grid .reveal:nth-child(2){transition-delay:.08s;}
+  .service-grid .reveal:nth-child(3), .process-grid .reveal:nth-child(3), .project-grid .reveal:nth-child(3){transition-delay:.16s;}
+  .service-grid .reveal:nth-child(4), .process-grid .reveal:nth-child(4){transition-delay:.24s;}
 
   /* ---------- about ---------- */
   .about-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:48px; align-items:start;}
   .about-grid p + p{margin-top:14px;}
   .about-grid p{color:var(--graphite); font-size:16px;}
   .pillars{display:flex; flex-direction:column; gap:18px;}
-  .pillar{border:1px solid var(--line); border-left:3px solid var(--cyan); border-radius:10px; padding:16px 18px; background:#fff;}
+  .pillar{border:1px solid var(--line); border-left:3px solid var(--teal); border-radius:10px; padding:16px 18px; background:#fff; transition:transform .2s ease, box-shadow .2s ease;}
+  .pillar:hover{transform:translateY(-2px); box-shadow:0 12px 24px rgba(10,24,48,.06);}
   .pillar strong{display:block; font-family:var(--font-display); font-size:15px; color:var(--ink); margin-bottom:4px;}
   .pillar span{font-size:14px; color:var(--graphite-60);}
 
   /* ---------- team ---------- */
   .team-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:24px; max-width:560px;}
-  .team-card{background:#fff; border:1px solid var(--line); border-radius:16px; padding:28px 24px; text-align:center;}
+  .team-card{background:#fff; border:1px solid var(--line); border-radius:16px; padding:28px 24px; text-align:center; transition:transform .2s ease, box-shadow .2s ease;}
+  .team-card:hover{transform:translateY(-4px); box-shadow:0 16px 32px rgba(10,24,48,.08);}
   .team-photo{width:128px; height:128px; border-radius:50%; object-fit:cover; margin:0 auto 16px; border:3px solid var(--paper-dim); display:block;}
   .team-name{font-size:18px; margin-bottom:4px;}
   .team-role{display:block; font-family:var(--font-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--graphite-60);}
@@ -152,7 +205,7 @@
   .service-card p.desc{color:var(--graphite-60); font-size:14.5px; margin-bottom:14px;}
   .service-card ul{margin:0; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:7px;}
   .service-card li{font-size:14px; color:var(--graphite); padding-left:18px; position:relative;}
-  .service-card li::before{content:""; position:absolute; left:0; top:7px; width:7px; height:7px; border-radius:50%; background:var(--coral);}
+  .service-card li::before{content:""; position:absolute; left:0; top:7px; width:7px; height:7px; border-radius:50%; background:var(--accent);}
 
   /* ---------- projects / how we work ---------- */
   .project-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
@@ -162,22 +215,23 @@
   .project-card p{font-size:14.5px; color:var(--graphite-60);}
   .project-note{margin-top:30px; font-size:13.5px; color:var(--graphite-60); font-style:italic;}
 
-  /* ---------- packages ---------- */
-  .package-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:stretch;}
-  .package-card{
-    background:#fff; border:1px solid var(--line); border-radius:16px;
-    padding:30px 26px; display:flex; flex-direction:column;
+  /* ---------- como funciona (processo por projeto) ---------- */
+  .process-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  .process-card{
+    background:#fff; border:1px solid var(--line); border-radius:14px;
+    padding:26px 22px; transition:transform .2s ease, box-shadow .2s ease;
   }
-  .package-card.is-featured{border-color:var(--coral); box-shadow:0 18px 40px rgba(255,107,69,.14); position:relative;}
-  .featured-flag{position:absolute; top:-12px; right:24px; background:var(--coral); color:#fff; font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; padding:5px 10px; border-radius:999px;}
-  .package-card h3{font-size:21px;}
-  .package-sub{font-size:13.5px; color:var(--graphite-60); margin-top:6px; margin-bottom:18px;}
-  .package-price{font-family:var(--font-mono); font-size:14.5px; color:var(--ink); margin-bottom:18px;}
-  .package-price strong{display:block; font-size:22px; font-weight:700;}
-  .package-card ul{list-style:none; margin:0 0 24px; padding:0; display:flex; flex-direction:column; gap:9px; flex:1;}
-  .package-card li{font-size:14px; padding-left:18px; position:relative; color:var(--graphite);}
-  .package-card li::before{content:"✓"; position:absolute; left:0; top:0; color:var(--cyan); font-weight:700; font-size:13px;}
-  .package-card .btn{justify-content:center; width:100%;}
+  .process-card:hover{transform:translateY(-3px); box-shadow:0 14px 28px rgba(10,24,48,.08);}
+  .process-step{font-family:var(--font-mono); font-size:13px; color:var(--teal); font-weight:600;}
+  .process-card h3{font-size:17px; margin:10px 0 8px;}
+  .process-card p{font-size:14px; color:var(--graphite-60);}
+  .quote-note{
+    margin-top:38px; padding:28px 32px; border-radius:16px;
+    background:#fff; border:1px dashed var(--line);
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  }
+  .quote-note p{font-size:15px; max-width:520px; color:var(--graphite);}
+  .quote-note strong{color:var(--ink);}
 
   /* ---------- final CTA ---------- */
   .cta-band{
@@ -200,23 +254,30 @@
   .wa-float{
     position:fixed; bottom:22px; right:22px; z-index:60;
     width:58px; height:58px; border-radius:50%;
-    background:var(--coral); display:flex; align-items:center; justify-content:center;
-    box-shadow:0 10px 24px rgba(255,107,69,.4);
+    background:var(--teal); display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 24px rgba(0,194,209,.4);
     opacity:0; transform:translateY(12px) scale(.9);
     transition:opacity .3s ease, transform .3s ease;
     pointer-events:none;
   }
   .wa-float.is-visible{opacity:1; transform:translateY(0) scale(1); pointer-events:auto;}
-  .wa-float svg{width:26px; height:26px;}
+  .wa-float svg{width:26px; height:26px; position:relative; z-index:1;}
+  .wa-float::before{
+    content:""; position:absolute; inset:-6px; border-radius:50%;
+    border:2px solid var(--teal); opacity:.6;
+    animation:wa-ping 2.4s ease-out infinite;
+  }
+  @keyframes wa-ping{ 0%{transform:scale(.9); opacity:.55;} 100%{transform:scale(1.55); opacity:0;} }
+  @media (prefers-reduced-motion: reduce){ .wa-float::before{animation:none; display:none;} }
 
   /* ---------- responsive ---------- */
   @media (max-width: 920px){
     .hero .wrap{grid-template-columns:1fr; gap:40px;}
-    .prism-figure{height:240px; order:-1;}
+    .data-figure{height:240px; order:-1;}
     .about-grid{grid-template-columns:1fr;}
     .service-grid{grid-template-columns:1fr;}
     .project-grid{grid-template-columns:1fr;}
-    .package-grid{grid-template-columns:1fr;}
+    .process-grid{grid-template-columns:repeat(2,1fr);}
     nav.primary-nav, .header-cta{display:none;}
     .menu-toggle{display:block;}
     nav.primary-nav.is-open{
@@ -226,6 +287,12 @@
     }
     nav.primary-nav.is-open .header-cta-mobile{display:block; margin-top:6px;}
   }
+
+  @media (max-width: 600px){
+    .process-grid{grid-template-columns:1fr;}
+    .team-grid{grid-template-columns:1fr; max-width:280px; margin:0 auto;}
+    .quote-note{flex-direction:column; align-items:flex-start;}
+  }
 </style>
 </head>
 <body>
@@ -233,24 +300,17 @@
 <header class="site-header">
   <div class="wrap">
     <a href="#topo" class="brand">
-      <svg class="brand-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="22,8 44,32 22,56" fill="#0E1F3D"/>
-        <line x1="44" y1="20" x2="58" y2="14" stroke="#FFC857" stroke-width="4" stroke-linecap="round"/>
-        <line x1="44" y1="28" x2="58" y2="26" stroke="#FF6B45" stroke-width="4" stroke-linecap="round"/>
-        <line x1="44" y1="36" x2="58" y2="38" stroke="#00C2D1" stroke-width="4" stroke-linecap="round"/>
-        <line x1="44" y1="44" x2="58" y2="50" stroke="#7B5EA7" stroke-width="4" stroke-linecap="round"/>
-      </svg>
-      JV Data
+      <img class="brand-mark" src="assets/jv-data-logo.png" alt="JV Data — Solução em Dados" width="142" height="40">
     </a>
     <nav class="primary-nav" id="primaryNav">
       <a href="#servicos">Serviços</a>
-      <a href="#pacotes">Pacotes</a>
+      <a href="#como-funciona">Como funciona</a>
       <a href="#sobre">Sobre</a>
       <a href="#equipe">Equipe</a>
       <a href="#contato">Contato</a>
-      <a class="btn btn-coral header-cta-mobile" id="waHeaderMobile" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <a class="btn btn-primary header-cta-mobile" id="waHeaderMobile" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
     </nav>
-    <a class="btn btn-coral header-cta" id="waHeader" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    <a class="btn btn-primary header-cta" id="waHeader" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -262,23 +322,36 @@
       <h1>Seus dados ainda vivem em planilhas soltas. <em>Nós os transformamos em decisão.</em></h1>
       <p class="lead">A JV Data organiza, automatiza e visualiza os dados da sua empresa — dashboards, relatórios e processos automatizados que sua equipe realmente usa todos os dias.</p>
       <div class="hero-ctas">
-        <a class="btn btn-coral" id="waHero" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
+        <a class="btn btn-primary" id="waHero" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
         <a class="btn btn-ghost-dark" href="#servicos">Ver serviços</a>
       </div>
       <div class="hero-meta">
         <div><strong>Power BI · Excel · SQL</strong>Stack de dados</div>
-        <div><strong>Power Automate · Cloud</strong>Stack de automação</div>
-        <div><strong>Projeto ou assinatura</strong>Modelo comercial</div>
+        <div><strong>Power Automate · Python</strong>Stack de automação</div>
+        <div><strong>Por projeto</strong>Modelo comercial</div>
       </div>
     </div>
-    <div class="prism-figure" aria-hidden="true">
+    <div class="data-figure" aria-hidden="true">
       <svg viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
-        <line class="beam-in" x1="0" y1="170" x2="150" y2="170"/>
-        <polygon points="150,90 230,170 150,250" fill="#13294F" stroke="#1C3A6B" stroke-width="2"/>
-        <line class="spectrum-line l1" x1="230" y1="135" x2="380" y2="70"/>
-        <line class="spectrum-line l2" x1="230" y1="155" x2="380" y2="135"/>
-        <line class="spectrum-line l3" x1="230" y1="185" x2="380" y2="205"/>
-        <line class="spectrum-line l4" x1="230" y1="205" x2="380" y2="270"/>
+        <text class="bracket-decor" x="10" y="260" font-size="220" font-family="JetBrains Mono, monospace">{</text>
+        <text class="bracket-decor" x="230" y="260" font-size="220" font-family="JetBrains Mono, monospace">}</text>
+        <g class="orbit-lines">
+          <line x1="190" y1="170" x2="70" y2="90"/>
+          <line x1="190" y1="170" x2="55" y2="200"/>
+          <line x1="190" y1="170" x2="130" y2="285"/>
+          <line x1="190" y1="170" x2="270" y2="285"/>
+          <line x1="190" y1="170" x2="330" y2="200"/>
+          <line x1="190" y1="170" x2="300" y2="80"/>
+        </g>
+        <g class="orbit-nodes">
+          <circle class="node n1" cx="70" cy="90" r="8"/>
+          <circle class="node n2" cx="55" cy="200" r="6"/>
+          <circle class="node n3" cx="130" cy="285" r="7"/>
+          <circle class="node n4" cx="270" cy="285" r="6"/>
+          <circle class="node n5" cx="330" cy="200" r="8"/>
+          <circle class="node n6" cx="300" cy="80" r="7"/>
+          <circle class="node-core" cx="190" cy="170" r="17"/>
+        </g>
       </svg>
     </div>
   </div>
@@ -296,7 +369,7 @@
       <div class="pillars reveal">
         <div class="pillar"><strong>Diagnóstico antes da solução</strong><span>Mapeamos seus dados e processos antes de propor qualquer dashboard ou automação.</span></div>
         <div class="pillar"><strong>Ferramentas que sua equipe já conhece</strong><span>Power BI, Excel e PowerPoint — sem curva de aprendizado desnecessária.</span></div>
-        <div class="pillar"><strong>Projeto pontual ou parceria contínua</strong><span>Você escolhe: uma entrega única ou manutenção e evolução mensal dos seus painéis.</span></div>
+        <div class="pillar"><strong>Escopo e prazo combinados com você</strong><span>Trabalhamos por projeto: entendemos a necessidade, definimos entregáveis e prazo antes de começar.</span></div>
       </div>
     </div>
   </div>
@@ -348,8 +421,8 @@
       </div>
 
       <div class="service-card reveal">
-        <div class="service-icon" style="background:rgba(123,94,167,.12);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#7B5EA7" stroke-width="1.8"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+        <div class="service-icon" style="background:rgba(10,85,96,.14);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0A5560" stroke-width="1.8"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
         </div>
         <h3>Gestão e Tratamento de Dados</h3>
         <p class="desc">Da planilha bagunçada ao dado limpo, modelado e confiável.</p>
@@ -361,8 +434,8 @@
       </div>
 
       <div class="service-card reveal">
-        <div class="service-icon" style="background:rgba(255,107,69,.12);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B45" stroke-width="1.8"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M7 13l3-3 2 2 4-4"/></svg>
+        <div class="service-icon" style="background:rgba(10,24,48,.08);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0A1830" stroke-width="1.8"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M7 13l3-3 2 2 4-4"/></svg>
         </div>
         <h3>Visualização e Relatórios</h3>
         <p class="desc">Painéis que cabem na tela do computador — e na TV da sala de operação.</p>
@@ -375,8 +448,8 @@
       </div>
 
       <div class="service-card reveal">
-        <div class="service-icon" style="background:rgba(255,200,87,.18);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#C98A1F" stroke-width="1.8"><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2Z"/><path d="M9 21h6"/></svg>
+        <div class="service-icon" style="background:rgba(0,230,236,.16);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#00A9B5" stroke-width="1.8"><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2Z"/><path d="M9 21h6"/></svg>
         </div>
         <h3>Consultoria em Dados</h3>
         <p class="desc">Análise para enxergar antes do problema acontecer.</p>
@@ -420,57 +493,38 @@
   </div>
 </section>
 
-<section class="section section-alt" id="pacotes">
+<section class="section section-alt" id="como-funciona">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Pacotes</span>
-      <h2>Um ponto de partida para cada estágio</h2>
-      <p>Valores e escopos sob diagnóstico — os pacotes abaixo são um ponto de partida para a conversa.</p>
+      <span class="eyebrow">Como funciona</span>
+      <h2>Trabalhamos por projeto, do jeito que faz sentido pra sua empresa</h2>
+      <p>Sem pacote fechado ou assinatura: entendemos o seu processo, definimos escopo e prazo juntos, e entregamos uma solução sob medida.</p>
     </div>
-    <div class="package-grid">
-
-      <div class="package-card reveal">
-        <h3>Starter</h3>
-        <p class="package-sub">Primeiros passos com dados</p>
-        <div class="package-price">a partir de <strong>R$ 3.500</strong></div>
-        <ul>
-          <li>Diagnóstico inicial de dados e processos</li>
-          <li>1 a 2 dashboards em Power BI</li>
-          <li>1 automação com Power Automate</li>
-          <li>1 relatório HTML básico interno</li>
-        </ul>
-        <a class="btn btn-outline wa-pkg" data-pkg="Starter" href="#" target="_blank" rel="noopener">Solicitar proposta</a>
+    <div class="process-grid">
+      <div class="process-card reveal">
+        <span class="process-step">01</span>
+        <h3>Diagnóstico</h3>
+        <p>Entendemos seu processo atual, onde estão os gargalos e o que faz mais sentido automatizar ou visualizar primeiro.</p>
       </div>
-
-      <div class="package-card is-featured reveal">
-        <span class="featured-flag">Mais procurado</span>
-        <h3>Pro</h3>
-        <p class="package-sub">Operação orientada por dados</p>
-        <div class="package-price">a partir de <strong>R$ 8.000</strong> + assinatura mensal</div>
-        <ul>
-          <li>Modelagem de dados (SQL + Power BI)</li>
-          <li>3 a 5 dashboards interativos</li>
-          <li>Painel para apresentação em TV</li>
-          <li>2 a 4 automações de processo</li>
-          <li>Apresentações executivas em PowerPoint conectadas aos dados</li>
-        </ul>
-        <a class="btn btn-coral wa-pkg" data-pkg="Pro" href="#" target="_blank" rel="noopener">Solicitar proposta</a>
+      <div class="process-card reveal">
+        <span class="process-step">02</span>
+        <h3>Proposta e escopo</h3>
+        <p>Você recebe um escopo claro, com prazo e entregáveis definidos antes de começar — sem letra miúda.</p>
       </div>
-
-      <div class="package-card reveal">
-        <h3>Enterprise</h3>
-        <p class="package-sub">Centro de inteligência de dados</p>
-        <div class="package-price">a partir de <strong>R$ 25.000</strong></div>
-        <ul>
-          <li>Arquitetura de dados em nuvem</li>
-          <li>Dashboards executivos multi-unidade + painéis de TV</li>
-          <li>Automações avançadas entre sistemas</li>
-          <li>Consultoria preditiva e diagnóstica recorrente</li>
-          <li>Squad dedicado e SLA definido</li>
-        </ul>
-        <a class="btn btn-outline wa-pkg" data-pkg="Enterprise" href="#" target="_blank" rel="noopener">Solicitar proposta</a>
+      <div class="process-card reveal">
+        <span class="process-step">03</span>
+        <h3>Desenvolvimento</h3>
+        <p>Construímos dashboards, automações e modelagem de dados, com checkpoints ao longo do caminho.</p>
       </div>
-
+      <div class="process-card reveal">
+        <span class="process-step">04</span>
+        <h3>Entrega e suporte</h3>
+        <p>Entrega final com documentação e suporte para dúvidas — com espaço para evoluir o projeto depois.</p>
+      </div>
+    </div>
+    <div class="quote-note reveal">
+      <p><strong>Valores a combinar.</strong> Cada projeto tem um escopo diferente, então o investimento é definido junto com você depois do diagnóstico inicial.</p>
+      <a class="btn btn-primary" id="waOrcamento" href="#" target="_blank" rel="noopener">Faça seu orçamento via WhatsApp</a>
     </div>
   </div>
 </section>
@@ -482,7 +536,7 @@
         <h2>Bora tirar sua empresa da planilha manual?</h2>
         <p>Fale agora pelo WhatsApp e conte um pouco do seu processo — respondemos rápido.</p>
       </div>
-      <a class="btn btn-coral" id="waCtaBand" href="#" target="_blank" rel="noopener" style="font-size:16px; padding:14px 26px;">Falar no WhatsApp</a>
+      <a class="btn btn-primary" id="waCtaBand" href="#" target="_blank" rel="noopener" style="font-size:16px; padding:14px 26px;">Falar no WhatsApp</a>
     </div>
   </div>
 </section>
@@ -492,7 +546,7 @@
     <small>© <span id="year"></span> JV Data — todos os direitos reservados.</small>
     <div class="footer-links">
       <a href="#servicos">Serviços</a>
-      <a href="#pacotes">Pacotes</a>
+      <a href="#como-funciona">Como funciona</a>
       <a href="#contato">Contato</a>
     </div>
   </div>
@@ -505,8 +559,7 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // ----- WhatsApp number: TODO substituir pelo número real da empresa -----
-  const WHATSAPP_NUMBER = '5511999999999'; // formato: 55 + DDD + número, sem espaços ou símbolos
+  const WHATSAPP_NUMBER = '5571999430604'; // formato: 55 + DDD + número, sem espaços ou símbolos
 
   function buildWaLink(message){
     return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(message);
@@ -519,10 +572,10 @@
     if(el) el.href = buildWaLink(defaultMessage);
   });
 
-  document.querySelectorAll('.wa-pkg').forEach(el => {
-    const pkg = el.getAttribute('data-pkg');
-    el.href = buildWaLink('Oi, bom dia! Gostaria de mais informações sobre o pacote ' + pkg + '.');
-  });
+  const orcamentoEl = document.getElementById('waOrcamento');
+  if(orcamentoEl){
+    orcamentoEl.href = buildWaLink('Oi! Gostaria de solicitar um orçamento para um projeto de BI, automação ou dados.');
+  }
 
   // ----- mobile menu -----
   const menuToggle = document.getElementById('menuToggle');
@@ -532,11 +585,13 @@
   });
   primaryNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => primaryNav.classList.remove('is-open')));
 
-  // ----- floating whatsapp visibility -----
+  // ----- floating whatsapp visibility + header scroll shadow -----
   const waFloat = document.getElementById('waFloat');
+  const siteHeader = document.querySelector('.site-header');
   window.addEventListener('scroll', () => {
     if(window.scrollY > 480){ waFloat.classList.add('is-visible'); }
     else{ waFloat.classList.remove('is-visible'); }
+    siteHeader.classList.toggle('is-scrolled', window.scrollY > 10);
   });
 
   // ----- reveal on scroll -----
@@ -554,6 +609,23 @@
   } else {
     reveals.forEach(el => el.classList.add('is-visible'));
   }
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "JV Data",
+  "description": "Consultoria especializada em Business Intelligence, automação de processos (Power Automate e Python) e tratamento de dados.",
+  "url": "https://zlordelo.github.io/jv-data/",
+  "image": "https://zlordelo.github.io/jv-data/assets/og-image.jpg",
+  "telephone": "+5571999430604",
+  "areaServed": "BR",
+  "founder": [
+    {"@type": "Person", "name": "João Lordelo"},
+    {"@type": "Person", "name": "Vitor Mota"}
+  ]
+}
 </script>
 
 </body>
