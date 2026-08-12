@@ -285,7 +285,12 @@
       background:var(--paper); flex-direction:column; padding:18px 24px; gap:16px;
       border-bottom:1px solid var(--line);
     }
-    nav.primary-nav.is-open .header-cta-mobile{display:block; margin-top:6px;}
+    nav.primary-nav.is-open .header-cta-mobile{
+      display:flex; align-items:center; justify-content:center; gap:9px;
+      width:100%; margin-top:10px; padding:14px 20px;
+      font-size:15.5px; box-shadow:none;
+    }
+    nav.primary-nav.is-open .header-cta-mobile svg{width:19px; height:19px; flex:none;}
   }
 
   @media (max-width: 600px){
@@ -300,7 +305,7 @@
 <header class="site-header">
   <div class="wrap">
     <a href="#topo" class="brand">
-      <img class="brand-mark" src="assets/jv-data-logo.png" alt="JV Data — Solução em Dados" width="142" height="40">
+      <img class="brand-mark" src="assets/jv-data-logo.png" alt="JV Data — Solução em Dados" width="101" height="40">
     </a>
     <nav class="primary-nav" id="primaryNav">
       <a href="#servicos">Serviços</a>
@@ -308,7 +313,10 @@
       <a href="#sobre">Sobre</a>
       <a href="#equipe">Equipe</a>
       <a href="#contato">Contato</a>
-      <a class="btn btn-primary header-cta-mobile" id="waHeaderMobile" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <a class="btn btn-primary header-cta-mobile" id="waHeaderMobile" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 32 32" fill="#fff"><path d="M16 3C9 3 3.3 8.7 3.3 15.7c0 2.6.8 5 2.1 7.1L3 29l6.4-2.3a13 13 0 0 0 6.6 1.8c7 0 12.7-5.7 12.7-12.7C28.7 8.7 23 3 16 3Zm0 2.4c5.7 0 10.3 4.6 10.3 10.3 0 5.7-4.6 10.3-10.3 10.3-2 0-3.9-.6-5.5-1.6l-.4-.2-3.8 1.4 1.3-3.7-.3-.4a10.2 10.2 0 0 1-1.6-5.6C5.7 10 10.3 5.4 16 5.4Zm-3.3 4.9c-.3 0-.7.1-.9.4-.3.4-1.1 1.1-1.1 2.6 0 1.5 1.1 3 1.3 3.2.2.2 2 3.1 4.8 4.3 2.4 1 2.9.8 3.4.7.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4l-2-1c-.3-.1-.5-.1-.7.2l-.6.9c-.1.2-.3.2-.5.1-.5-.2-1.6-.6-2.7-1.7-1-1-1.6-2-1.7-2.3-.1-.2 0-.4.1-.5l.7-.8c.1-.2.2-.4.1-.6l-.9-2.1c-.1-.3-.3-.4-.6-.4Z"/></svg>
+        Falar no WhatsApp
+      </a>
     </nav>
     <a class="btn btn-primary header-cta" id="waHeader" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
