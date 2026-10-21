@@ -1,0 +1,75 @@
+---
+import Icon from './Icon.astro';
+import { problems } from '../data/site';
+---
+
+<section class="section" id="problemas" aria-labelledby="problemas-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">{problems.eyebrow}</p>
+      <h2 id="problemas-title">{problems.title}</h2>
+    </div>
+    <ul class="grid">
+      {
+        problems.items.map((item, i) => (
+          <li class="card reveal" style={`--i:${i}`}>
+            <span class="icon">
+              <Icon name={item.icon} size={22} />
+            </span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px 22px;
+  }
+
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #fdecec;
+    color: #b42318;
+    margin-bottom: 14px;
+  }
+
+  h3 {
+    font-size: 1.125rem;
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: var(--muted);
+    font-size: 0.9688rem;
+  }
+
+  @media (max-width: 1023px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 559px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

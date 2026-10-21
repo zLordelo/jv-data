@@ -1,0 +1,83 @@
+---
+import Icon from './Icon.astro';
+import { company, finalCta } from '../data/site';
+import { formatPhoneForDisplay } from '../lib/whatsapp';
+
+interface Props {
+  waLink: string;
+}
+
+const { waLink } = Astro.props;
+---
+
+<section class="section" id="contato" aria-labelledby="contato-title">
+  <div class="wrap">
+    <div class="band reveal">
+      <div>
+        <h2 id="contato-title">{finalCta.title}</h2>
+        <p>{finalCta.text}</p>
+      </div>
+      <div class="action">
+        <a class="btn btn-primary btn-lg" href={waLink} target="_blank" rel="noopener" data-cta="contato">
+          <Icon name="whatsapp" size={22} />
+          {finalCta.cta}
+        </a>
+        <p class="phone">ou salve nosso número: <strong>{formatPhoneForDisplay(company.whatsapp)}</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .band {
+    background:
+      radial-gradient(70% 120% at 100% 0%, rgba(0, 194, 209, 0.22), transparent 60%),
+      linear-gradient(120deg, var(--ink) 0%, var(--ink-deep) 100%);
+    color: var(--white);
+    border-radius: 24px;
+    padding: clamp(32px, 6vw, 60px) clamp(22px, 5vw, 56px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  h2 {
+    color: var(--white);
+    font-size: clamp(1.5rem, 3.2vw, 2.25rem);
+  }
+
+  .band p {
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 12px;
+    max-width: 480px;
+  }
+
+  .action {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .action .phone {
+    font-size: 0.875rem;
+    text-align: center;
+  }
+
+  .phone strong {
+    color: var(--white);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 767px) {
+    .band {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .action .btn {
+      width: 100%;
+    }
+  }
+</style>

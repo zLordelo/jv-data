@@ -1,0 +1,81 @@
+---
+import Icon from './Icon.astro';
+import { faq } from '../data/site';
+---
+
+<section class="section section-alt" id="duvidas" aria-labelledby="duvidas-title">
+  <div class="wrap narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">{faq.eyebrow}</p>
+      <h2 id="duvidas-title">{faq.title}</h2>
+    </div>
+    <!-- <details> nativo: abre e fecha sem JavaScript, acessível por teclado e leitor de tela. -->
+    <div class="list">
+      {
+        faq.items.map((item, i) => (
+          <details class="item" name="faq" open={i === 0}>
+            <summary>
+              <h3>{item.q}</h3>
+              <Icon name="plus" size={22} class="toggle" />
+            </summary>
+            <p>{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .narrow {
+    max-width: 860px;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .item {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 56px;
+    padding: 16px 20px;
+    cursor: pointer;
+    list-style: none;
+    border-radius: 12px;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary h3 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+  }
+
+  summary :global(.toggle) {
+    flex: none;
+    color: var(--accent);
+    transition: transform 0.2s ease;
+  }
+
+  .item[open] summary :global(.toggle) {
+    transform: rotate(45deg);
+  }
+
+  .item p {
+    padding: 0 20px 20px;
+    color: var(--muted);
+  }
+</style>

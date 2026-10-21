@@ -1,0 +1,170 @@
+---
+import Icon from './Icon.astro';
+import { company, services } from '../data/site';
+import { buildWhatsAppLink } from '../lib/whatsapp';
+---
+
+<section class="section section-alt" id="servicos" aria-labelledby="servicos-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">{services.eyebrow}</p>
+      <h2 id="servicos-title">{services.title}</h2>
+      <p>{services.intro}</p>
+    </div>
+    <div class="grid">
+      {
+        services.items.map((s, i) => (
+          <article class="card reveal" id={`servico-${s.id}`} style={`--i:${i % 2}`}>
+            <div class="head">
+              <span class="icon">
+                <Icon name={s.icon} size={24} />
+              </span>
+              <div>
+                <h3>{s.title}</h3>
+                <p class="tools">{s.tools}</p>
+              </div>
+            </div>
+            <p class="text">{s.text}</p>
+            <p class="examples-label">Exemplos:</p>
+            <ul class="examples">
+              {s.examples.map((e) => (
+                <li>
+                  <Icon name="check" size={18} />
+                  {e}
+                </li>
+              ))}
+            </ul>
+            <a
+              class="more"
+              href={buildWhatsAppLink(company.whatsapp, s.message)}
+              target="_blank"
+              rel="noopener"
+              data-cta={`servico-${s.id}`}
+            >
+              Quero saber mais sobre {s.title.toLowerCase()}
+              <Icon name="arrow" size={18} />
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: clamp(22px, 3vw, 30px);
+    transition:
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .icon {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(0, 194, 209, 0.14);
+    color: var(--teal-deep);
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  .tools {
+    font-size: 0.875rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  .text {
+    color: var(--graphite);
+  }
+
+  .examples-label {
+    margin-top: 16px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .examples {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+  }
+
+  .examples li {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+
+  .examples :global(svg) {
+    flex: none;
+    margin-top: 3px;
+    color: var(--accent);
+  }
+
+  .more {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    font-weight: 600;
+    color: var(--teal-deep);
+    text-decoration: underline;
+    text-decoration-color: rgba(10, 85, 96, 0.3);
+    text-underline-offset: 4px;
+  }
+
+  .more:hover {
+    text-decoration-color: currentColor;
+  }
+
+  .more :global(svg) {
+    transition: transform 0.2s ease;
+  }
+
+  .more:hover :global(svg) {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 767px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
