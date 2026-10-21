@@ -1,0 +1,132 @@
+---
+import Icon from './Icon.astro';
+import { company, process, waMessages } from '../data/site';
+import { buildWhatsAppLink } from '../lib/whatsapp';
+
+const quoteLink = buildWhatsAppLink(company.whatsapp, waMessages.quote);
+---
+
+<section class="section section-alt" id="como-funciona" aria-labelledby="como-funciona-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">{process.eyebrow}</p>
+      <h2 id="como-funciona-title">{process.title}</h2>
+      <p>{process.intro}</p>
+    </div>
+    <ol class="steps">
+      {
+        process.steps.map((step, i) => (
+          <li class="step reveal" style={`--i:${i}`}>
+            <span class="num" aria-hidden="true">
+              {i + 1}
+            </span>
+            <h3>
+              <span class="visually-hidden">Passo {i + 1}: </span>
+              {step.title}
+            </h3>
+            <p>{step.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <div class="quote reveal">
+      <div>
+        <h3>{process.quote.title}</h3>
+        <p>{process.quote.text}</p>
+      </div>
+      <a class="btn btn-primary btn-lg" href={quoteLink} target="_blank" rel="noopener" data-cta="orcamento">
+        <Icon name="whatsapp" size={22} />
+        {process.quote.cta}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    counter-reset: none;
+  }
+
+  .step {
+    position: relative;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px 22px;
+  }
+
+  .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--teal-bright);
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  .step h3 {
+    font-size: 1.125rem;
+    margin-bottom: 8px;
+  }
+
+  .step p {
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+
+  .quote {
+    margin-top: 36px;
+    padding: clamp(22px, 3vw, 32px);
+    border-radius: 18px;
+    background: var(--white);
+    border: 2px dashed rgba(0, 194, 209, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .quote h3 {
+    font-size: 1.375rem;
+  }
+
+  .quote p {
+    margin-top: 6px;
+    max-width: 560px;
+    color: var(--graphite);
+  }
+
+  .quote .btn {
+    flex: none;
+  }
+
+  @media (max-width: 1023px) {
+    .steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .quote {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  @media (max-width: 559px) {
+    .steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

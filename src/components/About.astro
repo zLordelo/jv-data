@@ -1,0 +1,144 @@
+---
+import { Picture } from 'astro:assets';
+import joao from '../assets/team/joao-lordelo.jpg';
+import vitor from '../assets/team/vitor-mota.jpg';
+import { about, company } from '../data/site';
+
+const photos = { 'joao-lordelo': joao, 'vitor-mota': vitor } as const;
+---
+
+<section class="section" id="sobre" aria-labelledby="sobre-title">
+  <div class="wrap grid">
+    <div class="reveal">
+      <p class="eyebrow">{about.eyebrow}</p>
+      <h2 id="sobre-title">{about.title}</h2>
+      {about.paragraphs.map((p) => <p class="text">{p}</p>)}
+
+      <h3 class="team-title" id="equipe">Quem cuida do seu projeto</h3>
+      <ul class="team">
+        {
+          company.founders.map((person) => (
+            <li class="person">
+              <Picture
+                src={photos[person.photo]}
+                formats={['avif', 'webp']}
+                widths={[64, 128]}
+                sizes="64px"
+                width={64}
+                height={64}
+                alt={`Foto de ${person.name}`}
+                loading="lazy"
+                decoding="async"
+                class="photo"
+              />
+              <div>
+                <p class="name">{person.name}</p>
+                <p class="role">{person.role}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <ul class="pillars">
+      {
+        about.pillars.map((pillar, i) => (
+          <li class="pillar reveal" style={`--i:${i}`}>
+            <h3>{pillar.title}</h3>
+            <p>{pillar.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
+  }
+
+  h2 {
+    font-size: clamp(1.625rem, 3.4vw, 2.375rem);
+    margin-top: 12px;
+  }
+
+  .text {
+    margin-top: 16px;
+    font-size: 1.0625rem;
+  }
+
+  .team-title {
+    margin-top: 36px;
+    font-size: 1.125rem;
+  }
+
+  .team {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .person {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 22px 8px 8px;
+  }
+
+  .person :global(.photo) {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .name {
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .role {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .pillar {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--teal);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+
+  .pillar h3 {
+    font-size: 1.0625rem;
+    margin-bottom: 4px;
+  }
+
+  .pillar p {
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 899px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

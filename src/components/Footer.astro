@@ -1,0 +1,113 @@
+---
+import { company, nav } from '../data/site';
+import { formatPhoneForDisplay } from '../lib/whatsapp';
+
+interface Props {
+  waLink: string;
+}
+
+const { waLink } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap grid">
+    <div class="about">
+      <p class="brand">{company.name}</p>
+      <p class="desc">{company.description}</p>
+    </div>
+    <nav aria-label="Rodapé">
+      <ul class="links">
+        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="contact">
+      <p class="label">Fale com a gente</p>
+      <a href={waLink} target="_blank" rel="noopener" data-cta="rodape">
+        WhatsApp: {formatPhoneForDisplay(company.whatsapp)}
+      </a>
+    </div>
+  </div>
+  <div class="wrap legal">
+    <small>© {year} {company.name}. Todos os direitos reservados.</small>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--line);
+    background: var(--white);
+    padding-top: 48px;
+    /* espaço para o botão flutuante do WhatsApp não cobrir o texto */
+    padding-bottom: 96px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 32px;
+  }
+
+  .brand {
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--ink);
+  }
+
+  .desc {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    max-width: 380px;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .links a,
+  .contact a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .links a:hover,
+  .contact a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  .label {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .contact a {
+    color: var(--teal-deep);
+    font-weight: 600;
+  }
+
+  .legal {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+
+  .legal small {
+    color: var(--muted);
+    font-size: 0.8125rem;
+  }
+
+  @media (max-width: 767px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+</style>

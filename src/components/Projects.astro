@@ -1,0 +1,123 @@
+---
+import { projects } from '../data/site';
+---
+
+<section class="section" id="exemplos" aria-labelledby="exemplos-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">{projects.eyebrow}</p>
+      <h2 id="exemplos-title">{projects.title}</h2>
+      <p>{projects.intro}</p>
+    </div>
+    <div class="grid">
+      {
+        projects.items.map((p, i) => (
+          <article class="card reveal" style={`--i:${i}`}>
+            <span class="tag">{p.tag}</span>
+            <h3>{p.title}</h3>
+            <dl>
+              <div class="row before">
+                <dt>Antes</dt>
+                <dd>{p.before}</dd>
+              </div>
+              <div class="row after">
+                <dt>Depois</dt>
+                <dd>{p.after}</dd>
+              </div>
+            </dl>
+          </article>
+        ))
+      }
+    </div>
+    <p class="note">{projects.note}</p>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tag {
+    width: fit-content;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--paper-dim);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+
+  h3 {
+    font-size: 1.125rem;
+  }
+
+  dl {
+    margin: 4px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .row {
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+
+  .before {
+    background: #fbf1f0;
+  }
+
+  .after {
+    background: #e8f7f8;
+  }
+
+  dt {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .before dt {
+    color: #a3261b;
+  }
+
+  .after dt {
+    color: var(--accent);
+  }
+
+  dd {
+    margin: 4px 0 0;
+    font-size: 0.9375rem;
+    color: var(--graphite);
+  }
+
+  .note {
+    margin-top: 28px;
+    font-size: 0.875rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  @media (max-width: 899px) {
+    .grid {
+      grid-template-columns: 1fr;
+      max-width: 560px;
+    }
+  }
+</style>

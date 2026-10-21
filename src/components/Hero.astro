@@ -1,0 +1,250 @@
+---
+import Icon from './Icon.astro';
+import { hero } from '../data/site';
+
+interface Props {
+  waLink: string;
+}
+
+const { waLink } = Astro.props;
+const bars = [42, 58, 50, 66, 61, 78, 72, 90];
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap grid">
+    <div class="copy">
+      <p class="eyebrow on-dark">{hero.eyebrow}</p>
+      <h1 id="hero-title">{hero.title} <em>{hero.highlight}</em></h1>
+      <p class="lead">{hero.lead}</p>
+      <div class="ctas">
+        <a class="btn btn-primary btn-lg" href={waLink} target="_blank" rel="noopener" data-cta="hero">
+          <Icon name="whatsapp" size={22} />
+          {hero.primaryCta}
+        </a>
+        <a class="btn btn-ghost btn-lg" href="#servicos">{hero.secondaryCta}</a>
+      </div>
+      <ul class="reassurance" aria-label="Por que conversar com a gente">
+        {
+          hero.reassurance.map((item) => (
+            <li>
+              <Icon name="check" size={18} />
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Ilustração de um painel: mostra ao visitante, sem jargão, o que é um "dashboard". -->
+    <div class="mock" aria-hidden="true">
+      <div class="mock-top">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="mock-title">Painel de vendas</span>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><span>Vendas do mês</span><strong>R$ 128 mil</strong><small class="up">▲ 12%</small></div>
+        <div class="kpi"><span>Meta atingida</span><strong>87%</strong><small class="up">▲ 5 p.p.</small></div>
+        <div class="kpi"><span>Atualizado</span><strong>Hoje</strong><small>automático</small></div>
+      </div>
+      <div class="chart">
+        {bars.map((h, i) => <span class="bar" style={`--h:${h}%; --d:${i * 70}ms`} />)}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    color: var(--white);
+    background:
+      radial-gradient(60% 80% at 85% 20%, rgba(0, 194, 209, 0.18), transparent 70%),
+      radial-gradient(120% 140% at 10% 0%, var(--ink) 0%, var(--ink-deep) 70%);
+    padding-block: clamp(48px, 8vw, 104px) clamp(56px, 9vw, 112px);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: center;
+  }
+
+  .eyebrow.on-dark {
+    color: var(--teal-bright);
+  }
+
+  h1 {
+    color: var(--white);
+    font-size: clamp(2rem, 4.6vw, 3.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    margin: 16px 0 20px;
+  }
+
+  h1 em {
+    font-style: normal;
+    color: var(--teal-bright);
+  }
+
+  .lead {
+    font-size: clamp(1.0625rem, 1.6vw, 1.1875rem);
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 540px;
+  }
+
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .reassurance {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    margin-top: 28px;
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .reassurance li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .reassurance :global(svg) {
+    color: var(--teal-bright);
+  }
+
+  /* ---------- painel ilustrativo ---------- */
+  .mock {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+  }
+
+  .mock-top {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  .mock-title {
+    margin-left: 8px;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .kpi {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .kpi span {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .kpi strong {
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-size: clamp(1rem, 2vw, 1.375rem);
+    color: var(--white);
+    white-space: nowrap;
+  }
+
+  .kpi small {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .kpi small.up {
+    color: var(--teal-bright);
+  }
+
+  .chart {
+    margin-top: 14px;
+    height: 170px;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 14px 12px 0;
+    border-radius: 12px;
+    background:
+      repeating-linear-gradient(to top, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 42px),
+      rgba(255, 255, 255, 0.03);
+  }
+
+  .bar {
+    flex: 1;
+    height: var(--h);
+    border-radius: 6px 6px 0 0;
+    background: linear-gradient(to top, var(--teal-deep), var(--teal));
+    transform-origin: bottom;
+  }
+
+  .bar:last-child {
+    background: linear-gradient(to top, var(--teal), var(--teal-bright));
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .bar {
+      animation: grow 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      animation-delay: calc(200ms + var(--d));
+    }
+  }
+
+  @keyframes grow {
+    from {
+      transform: scaleY(0);
+    }
+  }
+
+  @media (max-width: 899px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .mock {
+      max-width: 520px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .ctas .btn {
+      width: 100%;
+    }
+    .chart {
+      height: 120px;
+    }
+    .kpis {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .kpi:nth-child(3) {
+      display: none;
+    }
+  }
+</style>
