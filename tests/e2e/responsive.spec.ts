@@ -32,7 +32,7 @@ test.describe('responsividade', () => {
     for (const width of WIDTHS) {
       await page.setViewportSize({ width, height: 900 });
       const overflowing = await page.$$eval('.kpi', (els) =>
-        els
+        (els as HTMLElement[])
           .filter((el) => el.offsetParent !== null)
           .filter((el) => [...el.children].some((c) => c.scrollWidth > c.clientWidth))
           .map((el) => el.textContent!.trim()),
