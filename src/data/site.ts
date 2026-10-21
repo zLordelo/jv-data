@@ -33,7 +33,7 @@ export const waMessages = {
 } as const;
 
 export const nav = [
-  { href: '#servicos', label: 'O que fazemos' },
+  { href: '#servicos', label: 'Serviços' },
   { href: '#como-funciona', label: 'Como funciona' },
   { href: '#sobre', label: 'Quem somos' },
   { href: '#duvidas', label: 'Dúvidas' },
@@ -45,7 +45,7 @@ export const hero = {
   highlight: 'sem planilha manual.',
   lead: 'A JV Data cria painéis e automações para você acompanhar vendas, custos e resultados em poucos cliques — e parar de perder horas montando relatório na mão.',
   primaryCta: 'Conversar no WhatsApp',
-  secondaryCta: 'Ver o que fazemos',
+  secondaryCta: 'Conheça nossos serviços',
   reassurance: ['Conversa sem compromisso', 'Projeto sob medida', 'Sem mensalidade'],
 } as const;
 
@@ -77,7 +77,7 @@ export const problems = {
 } as const;
 
 export const services = {
-  eyebrow: 'O que fazemos',
+  eyebrow: 'Nossos serviços',
   title: 'Quatro formas de colocar seus dados para trabalhar por você',
   intro: 'Você não precisa saber o nome das ferramentas. Conte o problema e nós indicamos o caminho.',
   items: [
