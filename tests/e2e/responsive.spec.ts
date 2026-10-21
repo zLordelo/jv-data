@@ -26,6 +26,21 @@ test.describe('responsividade', () => {
     }
   });
 
+  test('valores do painel ilustrativo cabem nos cartões em qualquer largura', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'desktop', 'varredura de larguras roda uma vez só');
+    await page.goto('./');
+    for (const width of WIDTHS) {
+      await page.setViewportSize({ width, height: 900 });
+      const overflowing = await page.$$eval('.kpi', (els) =>
+        els
+          .filter((el) => el.offsetParent !== null)
+          .filter((el) => [...el.children].some((c) => c.scrollWidth > c.clientWidth))
+          .map((el) => el.textContent!.trim()),
+      );
+      expect(overflowing, `largura ${width}px`).toEqual([]);
+    }
+  });
+
   test('textos legíveis: corpo com pelo menos 14px', async ({ page }) => {
     await page.goto('./');
     const small = await page.$$eval('main p, main li, main dd', (els) =>
