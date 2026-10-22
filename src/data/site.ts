@@ -1,9 +1,10 @@
 /**
  * Todo o texto da página fica aqui. Para mudar uma frase, um serviço ou uma
- * pergunta do FAQ, edite este arquivo — não é preciso mexer no layout.
+ * pergunta do FAQ, edite este arquivo. Não é preciso mexer no layout.
  *
  * Regra de escrita: frases curtas, sem siglas soltas e explicando o resultado
  * para o cliente (o "para quê") antes da ferramenta (o "com o quê").
+ * Não use travessões, aspas curvas nem o separador "·" (há teste para isso).
  */
 
 export const company = {
@@ -23,7 +24,7 @@ export const seo = {
   description:
     'Painéis em Power BI, automação de tarefas e organização de dados para sua empresa. Menos planilha manual e números claros. Fale com a JV Data no WhatsApp.',
   ogImage: 'assets/og-image.jpg',
-  ogImageAlt: 'Logo da JV Data — Solução em dados',
+  ogImageAlt: 'Logo da JV Data, Solução em dados',
 } as const;
 
 /** Mensagens que já chegam escritas no WhatsApp, uma para cada botão. */
@@ -40,18 +41,18 @@ export const nav = [
 ] as const;
 
 export const hero = {
-  eyebrow: 'Painéis · Automação · Dados',
+  eyebrow: 'Consultoria em dados',
   title: 'Os números da sua empresa claros, atualizados e',
   highlight: 'sem planilha manual.',
-  lead: 'A JV Data cria painéis e automações para você acompanhar vendas, custos e resultados em poucos cliques — e parar de perder horas montando relatório na mão.',
+  lead: 'A JV Data cria painéis e automações para você acompanhar os resultados da empresa em poucos cliques, sem gastar horas montando relatórios manualmente.',
   primaryCta: 'Conversar no WhatsApp',
   secondaryCta: 'Conheça nossos serviços',
-  reassurance: ['Conversa sem compromisso', 'Projeto sob medida', 'Sem mensalidade'],
+  reassurance: ['Conversa sem compromisso', 'Sem mensalidade'],
 } as const;
 
 export const problems = {
-  eyebrow: 'Você se identifica?',
-  title: 'Se algum destes problemas parece familiar, podemos ajudar',
+  eyebrow: 'Problemas comuns',
+  title: 'Situações que resolvemos no dia a dia das empresas',
   items: [
     {
       icon: 'clock',
@@ -61,7 +62,7 @@ export const problems = {
     {
       icon: 'alert',
       title: 'Relatório atrasado ou com erro',
-      text: 'Quando o relatório fica pronto, os números já estão velhos — ou alguém digitou errado.',
+      text: 'Quando o relatório fica pronto, os números já estão desatualizados ou têm erros de digitação.',
     },
     {
       icon: 'split',
@@ -70,23 +71,23 @@ export const problems = {
     },
     {
       icon: 'eye',
-      title: 'Decisões no escuro',
-      text: 'Fica difícil saber, com segurança, quanto vendeu, quanto gastou e onde está o lucro.',
+      title: 'Pouca clareza sobre os resultados',
+      text: 'Fica difícil saber com segurança quanto a empresa vendeu, gastou e lucrou no mês.',
     },
   ],
 } as const;
 
 export const services = {
   eyebrow: 'Nossos serviços',
-  title: 'Quatro formas de colocar seus dados para trabalhar por você',
-  intro: 'Você não precisa saber o nome das ferramentas. Conte o problema e nós indicamos o caminho.',
+  title: 'Como podemos ajudar a sua empresa',
+  intro: 'Não é preciso conhecer as ferramentas. Basta explicar a sua necessidade e indicamos a melhor solução.',
   items: [
     {
       id: 'paineis',
       icon: 'chart',
       title: 'Painéis e relatórios',
       tools: 'Power BI',
-      text: 'Todos os números importantes em uma tela só, atualizados e fáceis de entender — no computador, no celular ou na TV da empresa.',
+      text: 'Os números mais importantes reunidos em uma única tela, atualizados e fáceis de entender. Funciona no computador, no celular e na TV da empresa.',
       examples: [
         'Painel de vendas, metas e faturamento',
         'Relatórios que se atualizam sozinhos',
@@ -99,11 +100,11 @@ export const services = {
       icon: 'bolt',
       title: 'Automação de tarefas',
       tools: 'Power Automate e Python',
-      text: 'Aquelas tarefas repetitivas do dia a dia passam a ser feitas automaticamente, sem erro de digitação e sem depender de alguém lembrar.',
+      text: 'As tarefas repetitivas do dia a dia passam a ser feitas automaticamente, com menos erros e sem depender de alguém lembrar de fazê-las.',
       examples: [
         'Envio automático de relatórios por e-mail',
         'Atualização de planilhas sem copiar e colar',
-        'Integração entre sistemas que “não conversam”',
+        'Integração entre sistemas diferentes',
       ],
       message: 'Olá! Vim pelo site da JV Data e tenho interesse em automatizar tarefas da minha empresa.',
     },
@@ -129,7 +130,7 @@ export const services = {
       examples: [
         'Diagnóstico da operação com base em dados',
         'Indicadores certos para acompanhar o negócio',
-        'Planejamento para crescer sem bagunça',
+        'Planejamento para o crescimento da empresa',
       ],
       message: 'Olá! Vim pelo site da JV Data e gostaria de uma consultoria em dados.',
     },
@@ -165,24 +166,24 @@ export const projects = {
 
 export const process = {
   eyebrow: 'Como funciona',
-  title: 'Simples, do primeiro contato à entrega',
-  intro: 'Sem pacote fechado e sem assinatura. Você sabe o que vai receber, em quanto tempo e por quanto antes de começarmos.',
+  title: 'Etapas de um projeto',
+  intro: 'Trabalhamos por projeto, sem pacote fechado ou assinatura. Antes de começar, você recebe o escopo, o prazo e o valor.',
   steps: [
     {
       title: 'Conversa inicial',
-      text: 'Você conta como funciona hoje e onde estão as dores. Nós fazemos as perguntas certas.',
+      text: 'Você explica como o processo funciona hoje e quais são as principais dificuldades.',
     },
     {
-      title: 'Proposta clara',
-      text: 'Enviamos o que será entregue, o prazo e o valor — tudo por escrito, sem letra miúda.',
+      title: 'Proposta',
+      text: 'Enviamos por escrito o que será entregue, o prazo e o valor do projeto.',
     },
     {
-      title: 'Mão na massa',
-      text: 'Construímos a solução e mostramos o andamento ao longo do caminho, para ajustar cedo.',
+      title: 'Desenvolvimento',
+      text: 'Construímos a solução e apresentamos o andamento durante o projeto, para que os ajustes sejam feitos a tempo.',
     },
     {
       title: 'Entrega e suporte',
-      text: 'Entregamos funcionando, ensinamos a usar e seguimos disponíveis para dúvidas.',
+      text: 'Entregamos a solução funcionando, mostramos como usar e continuamos disponíveis para dúvidas.',
     },
   ],
   quote: {
@@ -194,19 +195,19 @@ export const process = {
 
 export const about = {
   eyebrow: 'Quem somos',
-  title: 'Gente de dados que fala a sua língua',
+  title: 'Sobre a JV Data',
   paragraphs: [
     'A JV Data ajuda empresas que ainda dependem de planilhas, retrabalho e relatórios desatualizados a ter informação confiável para decidir melhor.',
-    'Atendemos pequenas, médias e grandes empresas — de quem está criando o primeiro painel até quem precisa organizar dados de vários sistemas. O ponto de partida é sempre o mesmo: entender o seu processo antes de propor qualquer ferramenta.',
+    'Atendemos empresas de pequeno, médio e grande porte, desde quem está criando o primeiro painel até quem precisa organizar dados de vários sistemas. Em todos os casos, começamos entendendo o seu processo antes de propor qualquer ferramenta.',
   ],
   pillars: [
     {
-      title: 'Primeiro entendemos, depois propomos',
+      title: 'Entendimento antes da proposta',
       text: 'Olhamos sua rotina e seus dados antes de sugerir qualquer solução.',
     },
     {
       title: 'Ferramentas que sua equipe já conhece',
-      text: 'Power BI, Excel e PowerPoint — sem precisar aprender um sistema novo do zero.',
+      text: 'Usamos Power BI, Excel e PowerPoint, para que a equipe não precise aprender um sistema novo.',
     },
     {
       title: 'Prazo e escopo combinados',
@@ -251,7 +252,7 @@ export const faq = {
 } as const;
 
 export const finalCta = {
-  title: 'Vamos tirar sua empresa da planilha manual?',
-  text: 'Mande uma mensagem no WhatsApp contando um pouco da sua rotina. A conversa é sem compromisso.',
+  title: 'Quer reduzir o trabalho manual na sua empresa?',
+  text: 'Envie uma mensagem pelo WhatsApp contando um pouco sobre a sua rotina. A conversa é sem compromisso.',
   cta: 'Conversar no WhatsApp',
 } as const;

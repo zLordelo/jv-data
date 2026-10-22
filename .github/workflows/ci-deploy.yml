@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: pages-${{ github.ref }}
+  group: deploy-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -37,27 +37,68 @@ jobs:
           retention-days: 14
 
   deploy:
-    name: Publicar no GitHub Pages
+    name: Publicar na Hostinger
     needs: test
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Conferir configuração
+        id: config
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          if [ -z "$SITE_URL" ]; then
+            echo "::warning title=Publicação não configurada::Crie a variável SITE_URL (ex.: https://www.seudominio.com.br) em Settings > Secrets and variables > Actions > Variables. Veja o README."
+            echo "build=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          case "$SITE_URL" in
+            https://*) ;;
+            *) echo "::error title=SITE_URL inválida::SITE_URL precisa começar com https://"; exit 1 ;;
+          esac
+          echo "build=true" >> "$GITHUB_OUTPUT"
+          if [ -z "$FTP_SERVER" ] || [ -z "$FTP_USERNAME" ] || [ -z "$FTP_PASSWORD" ]; then
+            echo "::warning title=FTP não configurado::O site foi gerado, mas não enviado. Baixe o artefato site-hostinger e envie pelo Gerenciador de Arquivos, ou crie os secrets FTP_SERVER, FTP_USERNAME e FTP_PASSWORD. Veja o README."
+            echo "ftp=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ftp=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/checkout@v5
+        if: steps.config.outputs.build == 'true'
       - uses: actions/setup-node@v5
+        if: steps.config.outputs.build == 'true'
         with:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
-      - run: npm run build
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v4
+        if: steps.config.outputs.build == 'true'
+      - name: Gerar o site para o domínio
+        if: steps.config.outputs.build == 'true'
+        run: npm run build
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          BASE_PATH: /
+
+      - name: Guardar o site gerado (para envio manual, se preciso)
+        if: steps.config.outputs.build == 'true'
+        uses: actions/upload-artifact@v4
         with:
-          path: dist
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          name: site-hostinger
+          path: dist/
+          include-hidden-files: true # inclui o .htaccess
+          retention-days: 30
+
+      - name: Enviar para a Hostinger por FTP
+        if: steps.config.outputs.ftp == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
+          local-dir: ./dist/
+          server-dir: ${{ vars.FTP_SERVER_DIR || 'public_html/' }}

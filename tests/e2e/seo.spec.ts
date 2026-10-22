@@ -63,6 +63,17 @@ test.describe('SEO e indexação', () => {
     expect(faq.mainEntity.map((q: { name: string }) => q.name)).toEqual(visible.map((t) => t.trim()));
   });
 
+  test('texto da página sem travessão, aspas curvas ou separador "·"', async ({ page }) => {
+    const texts = await page.evaluate(() => [
+      document.title,
+      document.body.innerText,
+      ...[...document.querySelectorAll('meta[content]')].map((m) => m.getAttribute('content') ?? ''),
+      ...[...document.querySelectorAll('[alt], [aria-label]')].map((el) => `${el.getAttribute('alt') ?? ''} ${el.getAttribute('aria-label') ?? ''}`),
+    ]);
+    const found = texts.flatMap((t) => t.match(/.{0,30}[\u2013\u2014\u201C\u201D\u2018\u2019\u00B7].{0,30}/g) ?? []);
+    expect(found).toEqual([]);
+  });
+
   test('links internos do menu apontam para seções existentes', async ({ page }) => {
     const hrefs = await page.$$eval('a[href^="#"]', (els) => els.map((el) => el.getAttribute('href')!));
     for (const href of new Set(hrefs)) {

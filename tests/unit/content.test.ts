@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import * as site from '../../src/data/site';
 import { company, faq, hero, nav, process, seo, services, waMessages } from '../../src/data/site';
 import { normalizePhone } from '../../src/lib/whatsapp';
 
@@ -57,5 +58,18 @@ describe('conteúdo do site', () => {
     const qs = faq.items.map((i) => i.q);
     expect(new Set(qs).size).toBe(qs.length);
     for (const q of qs) expect(q.endsWith('?')).toBe(true);
+  });
+
+  it('textos sem travessão, aspas curvas ou separador "·" (marcas comuns de texto gerado)', () => {
+    const strings: string[] = [];
+    const collect = (value: unknown) => {
+      if (typeof value === 'string') strings.push(value);
+      else if (Array.isArray(value)) value.forEach(collect);
+      else if (value && typeof value === 'object') Object.values(value).forEach(collect);
+    };
+    collect(site);
+    expect(strings.length).toBeGreaterThan(50);
+    const offenders = strings.filter((text) => /[\u2013\u2014\u201C\u201D\u2018\u2019\u00B7]/.test(text));
+    expect(offenders).toEqual([]);
   });
 });

@@ -32,11 +32,11 @@ O site anterior falava a língua de quem já trabalha com dados: "Business Intel
 
 A nova versão:
 
-- Começa pelo **problema do cliente** (seção "Você se identifica?") e só depois fala de solução.
+- Começa pelo **problema do cliente** (seção "Problemas comuns") e só depois fala de solução.
 - Explica **o resultado** antes da ferramenta: "Painéis e relatórios" vem antes de "Power BI".
 - Mostra **antes e depois** nos exemplos de projeto.
 - Ganhou um **FAQ** com as dúvidas que travam a decisão: preço, mensalidade, prazo, "preciso entender de tecnologia?".
-- Tem um teste automatizado que impede frases com mais de 35 palavras.
+- Tem testes automatizados que impedem frases com mais de 35 palavras e o uso de travessões, aspas curvas e do separador "·".
 
 Todo o texto fica em `src/data/site.ts`. Para mudar uma frase não é preciso mexer no layout.
 
@@ -54,7 +54,7 @@ Todo o texto fica em `src/data/site.ts`. Para mudar uma frase não é preciso me
 ## Indexação
 
 - **Adicionados:** `sitemap-index.xml`, `robots.txt`, `manifest.webmanifest`, `canonical` com barra final consistente.
-- **Atenção:** no GitHub Pages em subpasta (`zlordelo.github.io/jv-data/`), os robôs de busca **não leem** o `robots.txt`, porque ele precisa estar na raiz do domínio. O sitemap continua funcionando quando enviado pelo Google Search Console. Com um domínio próprio, tudo passa a valer automaticamente.
+- **Hospedagem:** o site é publicado na raiz do domínio na Hostinger, então o `robots.txt` é lido pelos buscadores. O `.htaccess` força HTTPS, devolve a página 404 correta e configura o cache dos arquivos.
 - **Recomendado:** cadastrar o site no [Google Search Console](https://search.google.com/search-console), enviar o sitemap e criar o Perfil da Empresa no Google (Google Business Profile).
 
 ## CTA (chamadas para ação)

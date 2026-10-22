@@ -1,0 +1,8 @@
+# Arquivos gerados pelo build: o nome muda a cada versão, então podem ficar
+# guardados no navegador por um ano sem risco de mostrar conteúdo antigo.
+# (FilesMatch aqui para valer acima da regra de 30 dias do .htaccess da raiz.)
+<IfModule mod_headers.c>
+  <FilesMatch ".+">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>

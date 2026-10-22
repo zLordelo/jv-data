@@ -22,7 +22,7 @@ const site = Astro.site ?? new URL('http://localhost');
 const home = new URL(withBase('/'), site).href;
 const orgId = `${home}#organizacao`;
 
-// Dados estruturados (schema.org) — ajudam o Google a entender quem é a empresa,
+// Dados estruturados (schema.org): ajudam o Google a entender quem é a empresa,
 // o que ela oferece e as perguntas frequentes. Gerados a partir do mesmo conteúdo da página.
 const jsonLd = {
   '@context': 'https://schema.org',
