@@ -1,7 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 
 const PORT = 4321;
-const BASE_PATH = process.env.BASE_PATH ?? '/jv-data';
+const BASE_PATH = process.env.BASE_PATH || '/';
+// Domínio usado nas URLs absolutas (canonical, sitemap) durante os testes.
+const SITE_URL = process.env.SITE_URL || 'https://www.exemplo.com.br';
 
 /**
  * Testes ponta a ponta no site já compilado (npm run build + astro preview),
@@ -40,6 +42,7 @@ export default defineConfig({
   webServer: {
     command: `npm run build && npx astro preview --port ${PORT} --ignore-lock`,
     url: `http://localhost:${PORT}${BASE_PATH.replace(/\/?$/, '/')}`,
+    env: { SITE_URL, BASE_PATH },
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },

@@ -2,10 +2,12 @@
 import { defineConfig, fontProviders } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// Endereço público do site. Ao usar um domínio próprio (ex.: https://jvdata.com.br),
-// defina SITE_URL com o domínio e BASE_PATH como "/" no ambiente de build.
-const SITE_URL = process.env.SITE_URL ?? 'https://zlordelo.github.io';
-const BASE_PATH = process.env.BASE_PATH ?? '/jv-data';
+// Endereço público do site, usado no canonical, no sitemap, no robots.txt e no Open Graph.
+// Na publicação (Hostinger), SITE_URL vem da variável SITE_URL do repositório no GitHub.
+// Sem ela, o build usa localhost, que só serve para desenvolvimento.
+const SITE_URL = process.env.SITE_URL || 'http://localhost:4321';
+// O site fica na raiz do domínio (public_html). Só mude se ele for para uma subpasta.
+const BASE_PATH = process.env.BASE_PATH || '/';
 
 export default defineConfig({
   site: SITE_URL,
