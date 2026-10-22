@@ -74,6 +74,8 @@ No GitHub Actions, o relatório com as capturas de tela de cada perfil fica disp
 
 O workflow `.github/workflows/ci-deploy.yml` roda os testes em todo push e pull request. Em `main`, se tudo passar, ele gera o site com o seu domínio e envia por FTP para a pasta `public_html` da Hostinger.
 
+Depois do envio, o passo **Conferir o site publicado** (`scripts/verificar-publicacao.sh`) abre o site e testa cada imagem, fonte e arquivo usado pela página. Se algum não abrir, a publicação fica vermelha e a mensagem indica a causa provável, como arquivos enviados para `public_html/public_html` ou a pasta `_astro` ausente.
+
 ### Configuração (uma vez só)
 
 No GitHub, vá em **Settings → Secrets and variables → Actions**.
