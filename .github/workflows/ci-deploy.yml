@@ -92,11 +92,33 @@ jobs:
           include-hidden-files: true # inclui o .htaccess
           retention-days: 30
 
+      # O hPanel mostra o servidor como "ftp://endereço". Aqui o valor é limpo
+      # (sem protocolo, porta, pasta ou espaços) e o endereço é conferido no DNS.
+      - name: Conferir servidor FTP
+        if: steps.config.outputs.ftp == 'true'
+        env:
+          RAW: ${{ secrets.FTP_SERVER }}
+        run: |
+          host="$(printf '%s' "$RAW" | tr -d '[:space:]')"
+          case "$host" in
+            *://*) echo "::warning title=FTP_SERVER ajustado::O valor tinha o prefixo do protocolo (ex.: ftp://), removido automaticamente."; host="${host#*://}" ;;
+          esac
+          host="${host%%/*}"
+          case "$host" in
+            *:*) echo "::warning title=FTP_SERVER ajustado::O valor tinha a porta (ex.: :21), removida automaticamente."; host="${host%%:*}" ;;
+          esac
+          echo "::add-mask::$host"
+          if ! getent hosts "$host" > /dev/null; then
+            echo "::error title=Servidor FTP não encontrado::O endereço em FTP_SERVER não existe no DNS. Em hPanel > Arquivos > Contas FTP, copie o IP do servidor FTP (só os números, sem ftp://) e salve no secret FTP_SERVER."
+            exit 1
+          fi
+          echo "FTP_HOST=$host" >> "$GITHUB_ENV"
+
       - name: Enviar para a Hostinger por FTP
         if: steps.config.outputs.ftp == 'true'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          server: ${{ env.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}

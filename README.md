@@ -81,7 +81,7 @@ No GitHub, vá em **Settings → Secrets and variables → Actions**.
 1. Na aba **Variables**, crie:
    - `SITE_URL`: o endereço do site, com `https://` e sem barra no final. Exemplo: `https://www.seudominio.com.br`.
 2. Na aba **Secrets**, crie com os dados de **hPanel → Arquivos → Contas FTP**:
-   - `FTP_SERVER`: o host FTP (por exemplo `ftp.seudominio.com.br` ou o IP mostrado no hPanel).
+   - `FTP_SERVER`: o IP do servidor FTP mostrado no hPanel, só os números (ex.: `185.12.3.4`). O IP funciona mesmo antes de o domínio apontar para a Hostinger. Se colar com `ftp://` na frente, o workflow remove sozinho.
    - `FTP_USERNAME`: o usuário FTP.
    - `FTP_PASSWORD`: a senha FTP.
 3. Opcionais (aba **Variables**), só se o padrão não funcionar:
