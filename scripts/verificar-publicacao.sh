@@ -2,7 +2,7 @@
 # Confere o site publicado: abre a página inicial e testa cada imagem, fonte e
 # arquivo que ela usa. Falha se algum não responder 200 e tenta explicar o motivo.
 #
-# Uso: SITE_URL=https://jvdata.com.br [SERVER_IP=1.2.3.4] bash scripts/verificar-publicacao.sh
+# Uso: SITE_URL=https://jvdata.com.br [SERVER_IP=1.2.3.4] [EXPECTED_VERSION=<commit>] bash scripts/verificar-publicacao.sh
 # SERVER_IP é usado quando o domínio ainda não resolve no DNS da máquina que roda o script.
 set -uo pipefail
 
@@ -47,6 +47,17 @@ fi
 if ! printf '%s' "$html" | grep -q 'data-cta="hero"'; then
   echo "::error title=Página diferente::$site/ respondeu, mas não com a página da JV Data (pode ser a página padrão da Hostinger)."
   exit 1
+fi
+
+# O envio grava versao.txt com o commit publicado. Se o site no ar mostrar outra
+# versão (ou nenhuma), o FTP gravou numa pasta diferente da que o domínio usa.
+if [ -n "${EXPECTED_VERSION:-}" ]; then
+  versao="$("${curl_base[@]}" -f "$site/versao.txt" 2> /dev/null | tr -d '[:space:]' | cut -c1-40)"
+  if [ "$versao" != "$EXPECTED_VERSION" ]; then
+    echo "::error title=Versão errada no ar::O site em $site não é a versão que acabou de ser enviada (versao.txt: '${versao:-ausente}'). O FTP gravou em ${FTP_DIR:-uma pasta} que não é a usada pelo domínio. Defina a variável FTP_SERVER_DIR com a pasta do site (ex.: domains/${host#www.}/public_html/)."
+    exit 1
+  fi
+  echo "Versão no ar confere com a enviada: $versao"
 fi
 
 # Arquivos usados pela página (src, srcset, href) mais os de indexação.
