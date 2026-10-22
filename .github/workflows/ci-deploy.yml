@@ -124,3 +124,10 @@ jobs:
           protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
           local-dir: ./dist/
           server-dir: ${{ vars.FTP_SERVER_DIR || 'public_html/' }}
+
+      - name: Conferir o site publicado
+        if: steps.config.outputs.ftp == 'true'
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          SERVER_IP: ${{ env.FTP_HOST }}
+        run: bash scripts/verificar-publicacao.sh
