@@ -74,7 +74,7 @@ No GitHub Actions, o relatório com as capturas de tela de cada perfil fica disp
 
 O workflow `.github/workflows/ci-deploy.yml` roda os testes em todo push e pull request. Em `main`, se tudo passar, ele gera o site com o seu domínio e envia por FTP para a pasta `public_html` da Hostinger.
 
-Depois do envio, o passo **Conferir o site publicado** (`scripts/verificar-publicacao.sh`) abre o site e testa cada imagem, fonte e arquivo usado pela página. Se algum não abrir, a publicação fica vermelha e a mensagem indica a causa provável, como arquivos enviados para `public_html/public_html` ou a pasta `_astro` ausente.
+Cada envio grava `versao.txt` com o commit publicado. Depois do envio, o passo **Conferir o site publicado** (`scripts/verificar-publicacao.sh`) confere se o site no ar mostra essa mesma versão (se não mostrar, o FTP gravou numa pasta que o domínio não usa) e testa cada imagem, fonte e arquivo usado pela página. Se algum não abrir, a publicação fica vermelha e a mensagem indica a causa provável, como arquivos enviados para `public_html/public_html` ou a pasta `_astro` ausente.
 
 ### Configuração (uma vez só)
 
@@ -87,7 +87,7 @@ No GitHub, vá em **Settings → Secrets and variables → Actions**.
    - `FTP_USERNAME`: o usuário FTP.
    - `FTP_PASSWORD`: a senha FTP.
 3. Opcionais (aba **Variables**), só se o padrão não funcionar:
-   - `FTP_SERVER_DIR`: pasta de destino no FTP. Padrão: `public_html/`. Se a conta FTP já abrir dentro do `public_html`, use `./`.
+   - `FTP_SERVER_DIR`: pasta de destino no FTP. Normalmente não é preciso: o passo **Descobrir a pasta do site no FTP** procura `domains/<domínio>/public_html/` (conta FTP principal), depois `public_html/` (conta do domínio) e, se nenhuma existir, usa a pasta onde a conta abre.
    - `FTP_PROTOCOL`: padrão `ftps` (conexão criptografada). Use `ftp` apenas se a Hostinger recusar o `ftps`.
 
 Na Hostinger, ative o SSL do domínio em **hPanel → Segurança → SSL** antes da primeira publicação. O `.htaccess` redireciona tudo para HTTPS.

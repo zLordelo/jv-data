@@ -78,7 +78,10 @@ jobs:
         if: steps.config.outputs.build == 'true'
       - name: Gerar o site para o domínio
         if: steps.config.outputs.build == 'true'
-        run: npm run build
+        run: |
+          npm run build
+          # Identifica a versão publicada; o passo de conferência compara com o site no ar.
+          echo "$GITHUB_SHA" > dist/versao.txt
         env:
           SITE_URL: ${{ vars.SITE_URL }}
           BASE_PATH: /
@@ -114,6 +117,16 @@ jobs:
           fi
           echo "FTP_HOST=$host" >> "$GITHUB_ENV"
 
+      - name: Descobrir a pasta do site no FTP
+        if: steps.config.outputs.ftp == 'true'
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PROTOCOL: ${{ vars.FTP_PROTOCOL || 'ftps' }}
+          FTP_SERVER_DIR: ${{ vars.FTP_SERVER_DIR }}
+        run: bash scripts/descobrir-pasta-ftp.sh
+
       - name: Enviar para a Hostinger por FTP
         if: steps.config.outputs.ftp == 'true'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -123,11 +136,12 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
           local-dir: ./dist/
-          server-dir: ${{ vars.FTP_SERVER_DIR || 'public_html/' }}
+          server-dir: ${{ env.FTP_DIR }}
 
       - name: Conferir o site publicado
         if: steps.config.outputs.ftp == 'true'
         env:
           SITE_URL: ${{ vars.SITE_URL }}
           SERVER_IP: ${{ env.FTP_HOST }}
+          EXPECTED_VERSION: ${{ github.sha }}
         run: bash scripts/verificar-publicacao.sh
